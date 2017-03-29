@@ -1,58 +1,90 @@
 var stopwatch = {
-	minutes: "5",
-	seconds: "00"
+    minutes: "5",
+    seconds: "00"
 }
 
+var testItems = [
 
-var questionList = [{
-	question1: '1. Who appears in the $100 dollar bill?',
-    choices: ["Benjamin Franklin", "Abraham Lincoln", "George Washington"],
-    correctAnswer: "Benjamin Franklin"
-  }, {
-    question2: '2. Who authored the phrase Confidence comes not from always being right but not fearing to be wrong?',                                                                   ",
-    choices: ["Marquis de Sade", "Nicolo Machiavelli", "Anonymous", "J.P Morgan"],
-    correctAnswer: "Anonymous"
-  }, {
-    question3: '3.	Author of "How to win friends and influence people":',
-    choices: ["Dale Carnegie", "Dalai Lama XIV ", "Donald Trump"],
-    correctAnswer: "Dale Carnegie"
-  }, {
-    question4: '4.	Public speaker and writer of See you at the Top',
-    choices: ["Robert Kiyosaki", "Tony Robbins", "Zig Ziglar"],
-    correctAnswer: "Zig Ziglar"
-  }, {
-    question5: '5.	First and only African American multi-billionaire',
-    choices: ["Jay Z", "Oprah Winfrey", "Colin Powell"],
-    correctAnswer: "Oprah Winfrey"
-  }];
+    {
+        question: "1. Who appears in the $100 dollar bill?",
+        choices: ["Benjamin Franklin", "Abraham Lincoln", "George Washington"],
+        correct: "Benjamin Franklin"
+    },
 
+    {
+        question: "2. Who authored the phrase Confidence comes not from always being right but not fearing to be wrong?",
+        choices: ["Marquis de Sade", "Nicolo Machiavelli", "Anonymous", "J.P Morgan"],
+        correct: "Benjamin Franklin"
+    },
 
-// The user will have the option to click on the button to start the game. This will clear the button, display the questions and start the timer
-$("#questions").on("click",function() {
-  $("button").remove();
-  $("#question-list").append("<div>'Hello'</div>")
-  console.log(questionList);
-  var quizCounter = setTimeout(function(){
-    }, 5000);
-  console.log(function);
+    {
+        question: "3.	Author of “How to win friends and influence people”:",
+        choices: ["Marquis de Sade", "Nicolo Machiavelli", "Anonymous", "J.P Morgan"],
+        correct: "Benjamin Franklin"
+    }
+];
+
+function createRadioBtn(i) {
+    for (k = 0; k < testItems[i].choices.length; k++) {
+        var $radioBtn = $('<input type="radio" name="rbtnCount' + i + '"/>');
+        var $label = $("<label>").text(testItems[i].choices[k]);
+        $radioBtn.appendTo("#questions");
+        $label.appendTo("#questions");
+    }
+}
+
+function questionChecker() {
+
+    for (var i = 0; i < testItems.length; i++) {
+        $("#questions").append(testItems[i].question);
+        $("#questions").append("<br>");
+        createRadioBtn(i);
+        $("#questions").append("<br>");
+
+        // create and if statement to verify choices against correct
+    }
+};
+
+// The user will have the option to click on the button to start the game. 
+$("#welcome").on("click", function() {
+    // This will clear the button
+    $("#welcome").html(" ");
+    // display the questions 
+    questionChecker();
+    timer();
 });
+
 // <div class="reset-button">
 // 			<button class="resetbtn btn btn-warning">Restart the Trivia Game!</button>		
 // 		</div>
-     
- 
-  
+
+function timer() {
+    var quizCounter = setTimeout(function() {
+    // before you clear the html, get playerAnswer
+    $("body").on("click", ".answer", function(event) {
+        //answeredQuestion = true;
+        selectedAnswer = $(this).text();
+        if (selectedAnswer === correctAnswers[questionCounter]) {
+            //alert("correct");
+
+            clearInterval(theClock);
+            generateWin();
+        } else {
+            //alert("wrong answer!");
+            clearInterval(theClock);
+            generateLoss();
+        }
+    });
+    // Get 
+    for ()
+
+    $("#questions").html("");
+    }, 60000);
+}
+// find which question was selected
+// compare playerAnswer to 
 
 
-// The timer will start. It will give the player 3 minutes to answer all the questions
-
-// There will be 7 questions. I will use the <select> tag in 3, the radio tag in other three and one will be True/False
-
-// The counter in the background will tally the answers and calculate score
-
-// A div will pop up and display the score. 
-
-// The score div will have a button to ask the player if they want to play again
 
 
 
